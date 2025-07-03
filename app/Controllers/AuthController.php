@@ -38,8 +38,17 @@ class AuthController extends BaseController
                         'role' => $dataUser['role'],
                         'isLoggedIn' => TRUE
                     ]);
+                    $today = date('Y-m-d');
+                    $diskonModel = new \App\Models\DiskonModel();
+                    $diskon = $diskonModel->where('tanggal', $today)->first();
 
-                    return redirect()->to(base_url('/'));
+                    if ($diskon) {
+                        session()->set('diskon', $diskon['nominal']);
+                    } else {
+                        session()->remove('diskon');
+                    }
+
+                    return redirect()->to('/dashboard');
                 } else {
                     session()->setFlashdata('failed', 'Kombinasi Username & Password Salah');
                     return redirect()->back();

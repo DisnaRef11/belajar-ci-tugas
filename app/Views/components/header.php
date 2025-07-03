@@ -16,14 +16,26 @@
         </form>
     </div><!-- End Search Bar -->
 
-    <nav class="header-nav ms-auto">
-        <ul class="d-flex align-items-center">
+     <?php if (session()->has('diskon')) : ?>
+                <li class="nav-item d-none d-md-block">
+                    <div class="nav-link">
+                        <span class="badge bg-success px-3 py-2">
+                            🎉 Diskon Hari Ini: <strong>Rp<?= number_format(session('diskon'), 0, ',', '.') ?>/item</strong>
+                        </span>
+                    </div>
+                </li>
+            <?php endif; ?>
+            <!-- End diskkon -->
 
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-left">
+ 
             <li class="nav-item d-block d-lg-none">
                 <a class="nav-link nav-icon search-bar-toggle " href="#">
                     <i class="bi bi-search"></i>
                 </a>
             </li><!-- End Search Icon-->
+
 
             <li class="nav-item dropdown">
 
