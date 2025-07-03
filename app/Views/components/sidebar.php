@@ -38,6 +38,18 @@
                     <span>Kategori Produk</span>
                 </a>
             </li><!-- End Category Nav -->
+
+
+            <?php if (session()->get('role') == 'admin') : ?>
+            <li class="nav-item">
+                <a class="nav-link <?php echo (uri_string() == 'diskon') ? "" : "collapsed" ?>" href="diskon">
+                    <i class="bi bi-cash-coin"></i>
+                    <span>Diskon</span>
+                </a>
+            </li>
+        <?php endif; ?>
+
+
         <?php
         }
         ?>

@@ -1,21 +1,76 @@
-public function create()
+<?php
+
+namespace App\Controllers;
+
+use App\Models\DiskonModel;
+
+class DiskonController extends BaseController
 {
-    $validation = \Config\Services::validation();
+    protected $diskonModel;
 
-    if ($this->request->getMethod() == 'post') {
-        $rules = [
-            'tanggal' => 'required|is_unique[diskon.tanggal]',
-            'nominal' => 'required|numeric'
-        ];
-
-        if ($this->validate($rules)) {
-            $this->diskonModel->save([
-                'tanggal' => $this->request->getPost('tanggal'),
-                'nominal' => $this->request->getPost('nominal'),
-            ]);
-            return redirect()->to('/diskon')->with('message', 'Diskon berhasil ditambahkan');
-        }
+    public function __construct()
+    {
+        $this->diskonModel = new DiskonModel();
     }
 
-    return view('diskon/create', ['validation' => $validation]);
+    public function index()
+    {
+        if (session()->get('role') != 'admin') return redirect()->to('/');
+        $data['diskon'] = $this->diskonModel->findAll();
+        return view('v_diskon', $data);
+    }
+
+    public function create()
+    {
+        if (session()->get('role') != 'admin') return redirect()->to('/');
+        return view('diskon');
+    }
+
+    public function store()
+    {
+        if (session()->get('role') != 'admin') return redirect()->to('/');
+
+        $tanggal = $this->request->getPost('tanggal');
+        $nominal = $this->request->getPost('nominal');
+
+        // Cek apakah tanggal sudah ada
+        if ($this->diskonModel->where('tanggal', $tanggal)->first()) {
+            return redirect()->back()->with('error', 'Diskon untuk tanggal ini sudah ada!');
+        }
+
+        $this->diskonModel->save([
+            'tanggal' => $tanggal,
+            'nominal' => $nominal,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        return redirect()->to('diskon')->with('success', 'Diskon berhasil ditambahkan!');
+    }
+
+    public function edit($id)
+    {
+        if (session()->get('role') != 'admin') return redirect()->to('/');
+        $data['diskon'] = $this->diskonModel->find($id);
+        return view('diskon', $data);
+    }
+
+    public function update($id)
+    {
+        if (session()->get('role') != 'admin') return redirect()->to('/');
+
+        $this->diskonModel->update($id, [
+            'nominal' => $this->request->getPost('nominal'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        return redirect()->to('diskon')->with('success', 'Diskon berhasil diupdate!');
+    }
+
+    public function delete($id)
+    {
+        if (session()->get('role') != 'admin') return redirect()->to('/');
+        $this->diskonModel->delete($id);
+        return redirect()->to('diskon')->with('success', 'Diskon berhasil dihapus!');
+    }
 }

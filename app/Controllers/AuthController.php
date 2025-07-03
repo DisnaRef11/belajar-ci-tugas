@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\DiskonModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 use App\Models\UserModel;
@@ -38,8 +39,9 @@ class AuthController extends BaseController
                         'role' => $dataUser['role'],
                         'isLoggedIn' => TRUE
                     ]);
+
                     $today = date('Y-m-d');
-                    $diskonModel = new \App\Models\DiskonModel();
+                    $diskonModel = new DiskonModel();
                     $diskon = $diskonModel->where('tanggal', $today)->first();
 
                     if ($diskon) {
@@ -49,6 +51,7 @@ class AuthController extends BaseController
                     }
 
                     return redirect()->to('/dashboard');
+                    
                 } else {
                     session()->setFlashdata('failed', 'Kombinasi Username & Password Salah');
                     return redirect()->back();

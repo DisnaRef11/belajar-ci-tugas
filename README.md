@@ -20,6 +20,13 @@ Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4]
 - Sistem Transaksi
   - Proses checkout
   - Riwayat transaksi
+- Sistem Diskon Otomatis
+  - Diskon per tanggal, disimpan di session saat login
+  - Ditampilkan di header dan diterapkan otomatis ke keranjang dan transaksi
+- Manajemen Diskon (admin only)
+  - Tambah/Edit/Hapus diskon
+  - Validasi: Tidak boleh tanggal sama
+  - Tanggal tidak bisa diubah saat edit
 - Panel Admin
   - Manajemen produk (CRUD)
   - Manajemen kategori
@@ -28,6 +35,9 @@ Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4]
 - Sistem Autentikasi
   - Login/Register pengguna
   - Manajemen akun
+- Integrasi Ongkir API (RajaOngkir)
+  - Pemilihan kelurahan dan kurir
+  - Nominal ongkir muncul otomatis
 - UI Responsif dengan NiceAdmin template
 
 ## Persyaratan Sistem
@@ -75,15 +85,28 @@ Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4]
 
 Proyek menggunakan struktur MVC CodeIgniter 4:
 
-- app/Controllers - Logika aplikasi dan penanganan request
+- app/Controllers
   - AuthController.php - Autentikasi pengguna
   - ProdukController.php - Manajemen produk
-  - TransaksiController.php - Proses transaksi
-- app/Models - Model untuk interaksi database
+  - TransaksiController.php - Proses keranjang, checkout
+  - Diskon.php - Manajemen diskon (admin only)
+
+ApiController.php - Webservice dashboard
+
+- app/Models
   - ProductModel.php - Model produk
   - UserModel.php - Model pengguna
-- app/Views - Template dan komponen UI
+  - TransactionModel.php - Model transaksi
+  - TransactionDetailModel.php - Detail transaksi
+
+DiskonModel.php - Model diskon
+
+- app/Views
   - v_produk.php - Tampilan produk
   - v_keranjang.php - Halaman keranjang
+  - v_checkout.php - Halaman checkout
+  - diskon/ - Halaman admin diskon
+
 - public/img - Gambar produk dan aset
+
 - public/NiceAdmin - Template admin
