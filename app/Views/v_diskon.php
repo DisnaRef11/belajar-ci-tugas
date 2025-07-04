@@ -24,7 +24,7 @@
 <table id="DiskonTable" class="table datatable">
     <thead>
         <tr>
-            <th>#</th>
+            <th>No.</th>
             <th>Tanggal</th>
             <th>Nominal (Rp)</th>
             <th>Aksi</th>

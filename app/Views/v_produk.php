@@ -105,15 +105,15 @@ if (session()->getFlashData('failed')) {
 </div>
 <!-- Edit Modal End -->
         <?php endforeach ?>
-       <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- DataTables JS & CSS -->
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+      
+      
+
+
 
     </tbody>
 </table>
 <!-- End Table with stripped rows --> 
+
  <!-- Add Modal Begin -->
 <div class="modal fade" id="addModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -152,18 +152,24 @@ if (session()->getFlashData('failed')) {
 </div>
 <!-- Add Modal End -->
 
+<!-- jQuery yang cocok -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!-- DataTables versi yang cocok -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+<!-- Inisialisasi DataTables -->
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#ProdukTable').DataTable({
             pageLength: 10,
             language: {
-                lengthMenu: "   _MENU_ entries per page",
-                search: "", // Menghilangkan label "Search"
-                searchPlaceholder: "Search" // Placeholder di dalam input
+                searchPlaceholder: "Cari produk...",
+                search: ""
             }
         });
     });
 </script>
-
 
 <?= $this->endSection() ?>

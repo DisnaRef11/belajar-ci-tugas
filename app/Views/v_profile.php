@@ -7,7 +7,7 @@ History Transaksi Pembelian <strong><?= $username ?></strong>
     <table class="table datatable">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">No.</th>
                 <th scope="col">ID Pembelian</th>
                 <th scope="col">Waktu Pembelian</th>
                 <th scope="col">Total Bayar</th>

@@ -45,6 +45,10 @@ class DiskonController extends BaseController
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
+        if ($tanggal === date('Y-m-d')) {
+        session()->set('diskon', $nominal);
+        }
+
         return redirect()->to('diskon')->with('success', 'Diskon berhasil ditambahkan!');
     }
 
@@ -59,18 +63,38 @@ class DiskonController extends BaseController
     {
         if (session()->get('role') != 'admin') return redirect()->to('/');
 
+        $nominalBaru = $this->request->getPost('nominal');
+
         $this->diskonModel->update($id, [
-            'nominal' => $this->request->getPost('nominal'),
+            'nominal' => $nominalBaru,
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
+
+        // ✅ Cek apakah tanggal diskon ini hari ini
+        $diskon = $this->diskonModel->find($id);
+        if ($diskon && $diskon['tanggal'] === date('Y-m-d')) {
+            session()->set('diskon', $nominalBaru);
+        }
 
         return redirect()->to('diskon')->with('success', 'Diskon berhasil diupdate!');
     }
 
     public function delete($id)
     {
-        if (session()->get('role') != 'admin') return redirect()->to('/');
-        $this->diskonModel->delete($id);
-        return redirect()->to('diskon')->with('success', 'Diskon berhasil dihapus!');
+        $diskon = $this->diskonModel->find($id);
+
+        
+        if ($diskon) {
+            $this->diskonModel->delete($id);
+
+            // 🔥 Cek jika diskon yang dihapus adalah hari ini
+            if ($diskon['tanggal'] == date('Y-m-d')) {
+                session()->remove('diskon');
+            }
+
+            return redirect()->to('diskon')->with('success', 'Diskon berhasil dihapus.');
+        }
+
+        return redirect()->to('diskon')->with('error', 'Diskon tidak ditemukan.');
     }
 }
