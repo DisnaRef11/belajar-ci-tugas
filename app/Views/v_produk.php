@@ -27,7 +27,7 @@ if (session()->getFlashData('failed')) {
     Download Data
 </a>
 <!-- Table with stripped rows -->
-<table id="ProdukTable" class="table datatable">
+<table id="ProdukTable" class="table">
     <thead>
         <tr>
             <th scope="col">No.</th>
@@ -152,24 +152,23 @@ if (session()->getFlashData('failed')) {
 </div>
 <!-- Add Modal End -->
 
-<!-- jQuery yang cocok -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<?= $this->section('script') ?>
+<!-- DataTables CSS & JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
-<!-- DataTables versi yang cocok -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-
-<!-- Inisialisasi DataTables -->
 <script>
     $(document).ready(function () {
         $('#ProdukTable').DataTable({
             pageLength: 10,
             language: {
-                searchPlaceholder: "Cari produk...",
+                searchPlaceholder: "Cari...",
                 search: ""
             }
         });
     });
 </script>
+<?= $this->endSection() ?>
+
 
 <?= $this->endSection() ?>

@@ -24,11 +24,6 @@ if (session()->getFlashData('success')) {
         </tr>
     </thead>
 
-<!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- DataTables JS & CSS -->
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
     <tbody>
         <?php
@@ -69,17 +64,5 @@ if (session()->getFlashData('success')) {
 
 <?php echo form_close() ?>
 
-<script>
-    $(document).ready(function() {
-        $('#KeranjangTable').DataTable({
-            pageLength: 10,
-            language: {
-                lengthMenu: "   _MENU_ entries per page",
-                search: "", // Menghilangkan label "Search"
-                searchPlaceholder: "Search" // Placeholder di dalam input
-            }
-        });
-    });
-</script>
 
 <?= $this->endSection() ?>

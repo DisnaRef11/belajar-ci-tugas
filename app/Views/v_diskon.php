@@ -21,7 +21,7 @@
 </button>
 
 <!-- Tabel -->
-<table id="DiskonTable" class="table datatable">
+<table id="DiskonTable" class="table">
     <thead>
         <tr>
             <th>No.</th>
@@ -103,10 +103,10 @@
     </div>
 </div>
 
-<!-- DataTables -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<?= $this->section('script') ?>
+<!-- DataTables CSS & JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -119,5 +119,6 @@
         });
     });
 </script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

@@ -53,6 +53,9 @@ if (uri_string() != "") {
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+
+   
+
     <!-- Vendor JS Files -->
     <script src="<?php echo base_url() ?>NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="<?php echo base_url() ?>NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -65,6 +68,7 @@ if (uri_string() != "") {
 
     <!-- Template Main JS File -->
     <script src="<?php echo base_url() ?>NiceAdmin/assets/js/main.js"></script>
+
 
 </body>
 
